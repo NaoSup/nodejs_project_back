@@ -1,4 +1,5 @@
-const Project = require('../models/Project');
+const Project = require('../models/Project')
+const constants = require('../config/constants')
 
 exports.createProject = (req, res, next) => {
   const project = new Project({
@@ -61,4 +62,21 @@ exports.deleteProject = (req, res, next) => {
       console.log(`project  ${req.params.id} deleted`)
       res.sendStatus(204)
     })
+}
+
+exports.getProjectsStats = async(req, res) => {
+  const projects = await Project.find()
+  const stats = {}
+  // init stats objects with data equals to zero
+  constants.PROJECT_STATUS.forEach(status => stats[status] = 0)
+  
+  // count number of projects for each status
+  projects.forEach(project => {
+    constants.PROJECT_STATUS.forEach(status => {
+      if (status === project.status) {
+        stats[status] += 1
+      }
+    })
+  })
+  res.send(stats)
 }

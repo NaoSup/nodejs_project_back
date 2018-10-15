@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const constants = require('../config/constants')
 
 const ProjectSchema = new Schema({
   name: {
@@ -24,7 +25,7 @@ const ProjectSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['cancelled', 'finished', 'in progress', 'prospect']
+    enum: constants.PROJECT_STATUS
   },
   comments: [{ type: String }]
 })
