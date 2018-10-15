@@ -1,0 +1,5 @@
+# Copyright 2018, Naomi Paulmin
+
+# [START gae_quickstart_yaml]
+runtime: nodejs8
+# [END gae_quickstart_yaml]
