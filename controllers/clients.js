@@ -20,7 +20,7 @@ exports.createClient = (req, res, next) => {
 exports.getClients = (req, res) => {
   Client.find()
     .then(results => {
-      res.send(results)
+      res.send({ code: 20000, data: results })
     })
     .catch(err => console.log('error while getting clients list', err))
 }
@@ -28,7 +28,7 @@ exports.getClients = (req, res) => {
 exports.getOneClient = (req, res) => {
   Client.find({ _id: req.params.id })
     .then(result => {
-      res.send(result)
+      res.send({ code: 20000, data: result})
     })
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }

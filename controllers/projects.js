@@ -25,7 +25,7 @@ exports.createProject = (req, res, next) => {
 exports.getProjects = (req, res) => {
   Project.find()
     .then(results => {
-      res.send(results)
+      res.send({ code: 20000, data: results })
     })
     .catch(err => console.log('error while getting projects list', err))
 }
@@ -33,7 +33,7 @@ exports.getProjects = (req, res) => {
 exports.getOneProject = (req, res) => {
   Project.find({ _id: req.params.id })
     .then(result => {
-      res.send(result)
+      res.send({ code: 20000, data: result })
     })
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }
@@ -78,5 +78,19 @@ exports.getProjectsStats = async(req, res) => {
       }
     })
   })
-  res.send(stats)
+  res.send({ code: 20000, data: stats })
+}
+
+exports.getSalesRevenue = async(req, res) => {
+  const aggregation = await Project.aggregate([
+    {
+      $group: {
+        _id: null,
+        revenue: { $sum: '$price' }
+      }
+    }
+  ])
+  const salesRevenue = aggregation.length && aggregation[0]['revenue']
+  res.send({ code: 20000, data: salesRevenue })
+  
 }

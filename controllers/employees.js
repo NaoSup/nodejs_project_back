@@ -23,15 +23,18 @@ exports.createEmployee = (req, res, next) => {
 exports.getEmployees = (req, res) => {
   Employee.find()
     .then(results => {
-      res.send(results)
+      res.send({ code:20000, data: results})
     })
-    .catch(err => console.log('error while getting employees list', err))
+    .catch(err => {
+      console.log('error while getting employees list', err)
+      res.send([])
+    })
 }
 
 exports.getOneEmployee = (req, res) => {
   Employee.find({ _id: req.params.id })
     .then(result => {
-      res.send(result)
+      res.send({ code:20000, data:result })
     })
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }
