@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use((req, res, next) => {
   res.header('Content-type', 'application/json');
   res.header('Accept', "application/json");
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200', 'https://nodejs-project-front.appspot.com/');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin');
 
