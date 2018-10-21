@@ -6,7 +6,7 @@ exports.createClient = (req, res, next) => {
     companyName: req.body.companyName,
     address: req.body.address,
     contactPerson: req.body.contactPerson,
-    businessLine: req.body.businessLine
+    businessSector: req.body.businessSector
   })
   client.save((err) => {
     if (err) {

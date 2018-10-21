@@ -27,7 +27,7 @@ const ClientSchema = new Schema({
       trim: true
     }
   },
-  businessLine: String
+  businessSector: String
 })
 
 module.exports = mongoose.model('Client', ClientSchema)
