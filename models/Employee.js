@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const constants = require('../config/constants')
 
 const EmployeeSchema = new Schema({
   lastName: {
@@ -36,7 +37,7 @@ const EmployeeSchema = new Schema({
   },
   position: {
     type: String,
-    enum: ['project manager', 'developer', 'sales representative', 'integrator'] // @TODO constants
+    enum: constants.EMPLOYEE_POSITIONS
   }
 })
 

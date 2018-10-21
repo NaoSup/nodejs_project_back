@@ -27,7 +27,6 @@ exports.getEmployees = (req, res) => {
     })
     .catch(err => {
       console.log('error while getting employees list', err)
-      res.send([])
     })
 }
 

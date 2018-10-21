@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const constants = require('../config/constants')
 
 const ClientSchema = new Schema({
   companyName: {
@@ -27,7 +28,10 @@ const ClientSchema = new Schema({
       trim: true
     }
   },
-  businessSector: String
+  businessSector: {
+    type: String,
+    enum: constants.BUSINESS_SECTORS
+  }
 })
 
 module.exports = mongoose.model('Client', ClientSchema)
