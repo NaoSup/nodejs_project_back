@@ -24,6 +24,8 @@ exports.createProject = (req, res, next) => {
 
 exports.getProjects = (req, res) => {
   Project.find()
+    .populate('client')
+    .exec()
     .then(results => {
       res.send({ code: 20000, data: results })
     })
@@ -32,6 +34,9 @@ exports.getProjects = (req, res) => {
 
 exports.getOneProject = (req, res) => {
   Project.find({ _id: req.params.id })
+    .populate('client')
+    .populate('employees')
+    .exec()
     .then(result => {
       res.send({ code: 20000, data: result })
     })
