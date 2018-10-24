@@ -101,15 +101,14 @@ exports.getSalesRevenue = async(req, res) => {
 }
 
 exports.getEmployeeProjects = async(req, res) => {
-  console.log(req.params)
   const projects = await Project.find({ employees: { $in: req.params.employee }})
     .populate('client').exec();
-  console.log(projects)
 
   res.send({ code: 20000, data: projects })
 }
 
 exports.getClientProjects = async(req, res) => {
-  const projects = await Project.find({ client: new ObjectId(req.params.client) })
+  const projects = await Project.find({ client: req.params.client })
+    .populate('employees').exec();
   res.send({ code: 20000, data: projects })
 }
