@@ -15,5 +15,9 @@ router.delete('/delete/:id', projectsController.deleteProject);
 router.get('/stats', projectsController.getProjectsStats);
 // Get sales revenue
 router.get('/revenue', projectsController.getSalesRevenue);
+// Get projects for an employee
+router.get('/employee/:employee', projectsController.getEmployeeProjects);
+// Get projects for a client
+router.get('/client/:client', projectsController.getClientProjects);
 
 module.exports = router;
