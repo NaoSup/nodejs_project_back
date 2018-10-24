@@ -1,7 +1,7 @@
 const Client = require('../models/Client');
 
+// Create a client
 exports.createClient = (req, res, next) => {
-  // const hash = bcrypt.hashSync(req.body.password, 10)
   const client = new Client({
     companyName: req.body.companyName,
     address: req.body.address,
@@ -16,7 +16,7 @@ exports.createClient = (req, res, next) => {
     res.sendStatus(204)
   })
 }
-
+// Get all clients
 exports.getClients = (req, res) => {
   Client.find()
     .then(results => {
@@ -24,7 +24,7 @@ exports.getClients = (req, res) => {
     })
     .catch(err => console.log('error while getting clients list', err))
 }
-
+// Get a client
 exports.getOneClient = (req, res) => {
   Client.find({ _id: req.params.id })
     .then(result => {
@@ -32,7 +32,7 @@ exports.getOneClient = (req, res) => {
     })
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }
-
+// Update a client
 exports.updateClient = (req, res, next) => {
   Client.findOneAndUpdate(
     { _id: req.params.id },
@@ -46,7 +46,7 @@ exports.updateClient = (req, res, next) => {
       res.sendStatus(204)
     })
 }
-
+// Delete a client
 exports.deleteClient = (req, res, next) => {
   Client.findOneAndDelete({ _id: req.params.id },
     err => {

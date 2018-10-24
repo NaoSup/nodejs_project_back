@@ -1,6 +1,7 @@
 const Project = require('../models/Project')
 const constants = require('../config/constants')
 
+// Create a project
 exports.createProject = (req, res, next) => {
   const project = new Project({
     name: req.body.name,
@@ -22,6 +23,7 @@ exports.createProject = (req, res, next) => {
   })
 }
 
+// Get all projects
 exports.getProjects = (req, res) => {
   Project.find()
     .populate('client')
@@ -32,6 +34,7 @@ exports.getProjects = (req, res) => {
     .catch(err => console.log('error while getting projects list', err))
 }
 
+// Get a project
 exports.getOneProject = (req, res) => {
   Project.find({ _id: req.params.id })
     .populate('client')
@@ -43,6 +46,7 @@ exports.getOneProject = (req, res) => {
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }
 
+// Update a project
 exports.updateProject = (req, res, next) => {
   Project.findOneAndUpdate(
     { _id: req.params.id },
@@ -57,6 +61,7 @@ exports.updateProject = (req, res, next) => {
     })
 }
 
+// Delete a project
 exports.deleteProject = (req, res, next) => {
   Project.findOneAndDelete({ _id: req.params.id },
     err => {
@@ -69,6 +74,7 @@ exports.deleteProject = (req, res, next) => {
     })
 }
 
+// Get project related stats
 exports.getProjectsStats = async(req, res) => {
   const projects = await Project.find()
   const stats = {}
@@ -86,6 +92,7 @@ exports.getProjectsStats = async(req, res) => {
   res.send({ code: 20000, data: stats })
 }
 
+// Get sales revenue
 exports.getSalesRevenue = async(req, res) => {
   const aggregation = await Project.aggregate([
     {
@@ -100,6 +107,7 @@ exports.getSalesRevenue = async(req, res) => {
   
 }
 
+// Get projects for an employee
 exports.getEmployeeProjects = async(req, res) => {
   const projects = await Project.find({ employees: { $in: req.params.employee }})
     .populate('client').exec();
@@ -107,6 +115,7 @@ exports.getEmployeeProjects = async(req, res) => {
   res.send({ code: 20000, data: projects })
 }
 
+// Get projects for a client
 exports.getClientProjects = async(req, res) => {
   const projects = await Project.find({ client: req.params.client })
     .populate('employees').exec();

@@ -1,5 +1,5 @@
 const Employee = require('../models/Employee');
-
+// Create an employee
 exports.createEmployee = (req, res, next) => {
   const employee = new Employee({
     lastName: req.body.lastName,
@@ -20,6 +20,7 @@ exports.createEmployee = (req, res, next) => {
   })
 }
 
+// Get all employees
 exports.getEmployees = (req, res) => {
   Employee.find()
     .then(results => {
@@ -30,6 +31,7 @@ exports.getEmployees = (req, res) => {
     })
 }
 
+// Get an employee
 exports.getOneEmployee = (req, res) => {
   Employee.find({ _id: req.params.id })
     .then(result => {
@@ -38,6 +40,7 @@ exports.getOneEmployee = (req, res) => {
     .catch(err => console.log(`error while getting client with id ${req.params.id}`, err))
 }
 
+// Update an employee
 exports.updateEmployee = (req, res, next) => {
   Employee.findOneAndUpdate(
     { _id: req.params.id },
@@ -52,6 +55,7 @@ exports.updateEmployee = (req, res, next) => {
     })
 }
 
+// Delete an employee
 exports.deleteEmployee = (req, res, next) => {
   Employee.findOneAndDelete({ _id: req.params.id },
     err => {
